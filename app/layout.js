@@ -1,7 +1,9 @@
 import { Cairo } from "next/font/google";
 import "./globals.css";
+// استيراد المكونات - تأكد من صحة المسارات لديك
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
-// إعداد خط Cairo
 const cairo = Cairo({
   subsets: ["arabic"],
   weight: ["300", "400", "500", "700", "900"],
@@ -23,12 +25,11 @@ export const metadata = {
     "ترميم",
     "تصميم داخلي",
     "السعودية",
-    "مصر",
   ],
   authors: [{ name: "البيت المتألق" }],
   viewport: "width=device-width, initial-scale=1",
   icons: {
-    // icon: "/favicon.ico",
+    icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
@@ -45,7 +46,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ar" dir="rtl" className={cairo.className}>
-      <body className="antialiased bg-white text-slate-900">{children}</body>
+      <body className="antialiased bg-white text-slate-900 flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-grow">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
