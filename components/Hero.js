@@ -27,7 +27,7 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-6 px-4 py-1.5 rounded-full bg-amber-100 border border-amber-200 text-amber-700 text-sm font-bold shadow-sm"
+          className="mb-6 mt-6 px-4 py-1.5 rounded-full bg-amber-100 border border-amber-200 text-amber-700 text-sm font-bold shadow-sm"
         >
           فخامة التصميم ودقة التنفيذ
         </motion.div>
