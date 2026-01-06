@@ -10,13 +10,11 @@ import LatestProjects from "@/components/LatestProjects";
 export default function page() {
   return (
     <>
-      <Navbar />
       <Hero />
       <Process />
       <Services />
       <LatestProjects />
       <Contact />
-      <Footer />
     </>
   );
 }
