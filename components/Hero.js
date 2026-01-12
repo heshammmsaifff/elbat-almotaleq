@@ -3,12 +3,14 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Building2, Paintbrush, ChevronDown } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Hero = () => {
+  const { lang } = useLanguage();
   return (
     <section
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-20"
-      dir="rtl"
+      className="relative p-10 min-h-screen w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-20"
+      dir={lang}
     >
       {/* Background Image Container */}
       <div className="absolute inset-0 z-0">
@@ -29,7 +31,9 @@ const Hero = () => {
           transition={{ duration: 0.5 }}
           className="mb-6 mt-6 px-4 py-1.5 rounded-full bg-amber-100 border border-amber-200 text-amber-700 text-sm font-bold shadow-sm"
         >
-          فخامة التصميم ودقة التنفيذ
+          {lang == "ar"
+            ? "فخامة التصميم ودقة التنفيذ"
+            : "Luxurious design and precise execution"}
         </motion.div>
 
         {/* Main Title */}
@@ -39,12 +43,15 @@ const Hero = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 leading-tight mb-8"
         >
-          البيت{" "}
           <span className="text-amber-500 drop-shadow-[0_0_15px_rgba(245,158,11,0.3)]">
-            المتألق
+            {lang == "ar" ? "البيت المتألق" : "The Shining House"}
           </span>{" "}
           <br />
-          <span className="text-slate-800">للمقاولات والديكور الداخلي</span>
+          <span className="text-slate-800">
+            {lang == "ar"
+              ? "للمقاولات والديكور الداخلي"
+              : "For Contracting and Interior Decoration"}
+          </span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -54,8 +61,9 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-lg md:text-xl text-slate-600 mb-12 max-w-2xl leading-relaxed font-medium"
         >
-          نحن لا نبني جدراناً فقط، بل نصنع مساحات تنبض بالحياة. خبرة تمتد لسنوات
-          في المقاولات العامة وأرقى حلول التصميم الداخلي.
+          {lang == "ar"
+            ? "نحن لا نبني جدراناً فقط، بل نصنع مساحات تنبض بالحياة. خبرة تمتد لسنوات في المقاولات العامة وأرقى حلول التصميم الداخلي."
+            : "We don't just build walls; we create vibrant spaces. Years of experience in general contracting and top-tier interior design solutions."}
         </motion.p>
 
         {/* Buttons */}
@@ -69,13 +77,13 @@ const Hero = () => {
             href="/contact"
             className="w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-white px-10 py-4 rounded-full font-bold text-lg transition-all shadow-xl shadow-amber-200 active:scale-95 text-center"
           >
-            ابدأ مشروعك الآن
+            {lang == "ar" ? "ابدأ مشروعك الآن" : "Start Now!"}
           </Link>
           <Link
             href="/projects"
             className="w-full sm:w-auto bg-white border-2 border-slate-200 hover:border-amber-500 hover:text-amber-600 text-slate-700 px-10 py-4 rounded-full font-bold text-lg transition-all active:scale-95 shadow-sm text-center"
           >
-            مشاهدة أعمالنا
+            {lang == "ar" ? "مشاهدة أعمالنا" : "View our work"}
           </Link>
         </motion.div>
 
@@ -91,7 +99,7 @@ const Hero = () => {
               <Building2 size={28} />
             </div>
             <span className="font-bold text-slate-800 uppercase tracking-wider text-sm">
-              مقاولات عامة
+              {lang == "ar" ? "مقاولات عامة" : "General Contracting"}
             </span>
           </div>
           <div className="flex flex-col items-center gap-2">
@@ -99,23 +107,11 @@ const Hero = () => {
               <Paintbrush size={28} />
             </div>
             <span className="font-bold text-slate-800 uppercase tracking-wider text-sm">
-              تصميم داخلي
+              {lang == "ar" ? "تصميم داخلي" : "Interior design"}
             </span>
           </div>
         </motion.div>
       </div>
-
-      {/* Floating Scroll Indicator */}
-      <motion.div
-        animate={{ y: [0, 12, 0] }}
-        transition={{ repeat: Infinity, duration: 2.5 }}
-        className="absolute bottom-8 flex flex-col items-center gap-1 opacity-40"
-      >
-        <span className="text-[10px] font-bold text-black uppercase tracking-widest">
-          تصفح
-        </span>
-        <ChevronDown size={20} className="text-slate-400" />
-      </motion.div>
     </section>
   );
 };

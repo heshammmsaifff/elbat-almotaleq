@@ -3,38 +3,52 @@
 import { motion } from "framer-motion";
 import { Search, PenTool, HardHat, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Process = () => {
+  const { lang } = useLanguage();
+
   const steps = [
     {
-      title: "اختر تصميمك",
+      title: lang === "ar" ? "اختر تصميمك" : "Choose Your Design",
       description:
-        "هل أعجبك تصميم على Pinterest أو Instagram؟ شاركنا الصورة فقط.",
+        lang === "ar"
+          ? "هل أعجبك تصميم على Pinterest أو Instagram؟ شاركنا الصورة فقط."
+          : "Liked a design on Pinterest or Instagram? Just share the photo with us.",
       icon: <Search className="w-8 h-8" />,
       color: "bg-blue-50 text-blue-600",
     },
     {
-      title: "التخطيط الهندسي",
-      description: "يقوم مهندسونا بمطابقة التصميم مع مساحة منزلك الفعلية.",
+      title: lang === "ar" ? "التخطيط الهندسي" : "Engineering Planning",
+      description:
+        lang === "ar"
+          ? "يقوم مهندسونا بمطابقة التصميم مع مساحة منزلك الفعلية."
+          : "Our engineers match the design with your actual home space.",
       icon: <PenTool className="w-8 h-8" />,
       color: "bg-amber-50 text-amber-600",
     },
     {
-      title: "التنفيذ المتقن",
-      description: "نبدأ العمل بأجود الخامات الوطنية والعالمية لضمان الدقة.",
+      title: lang === "ar" ? "التنفيذ المتقن" : "Masterful Execution",
+      description:
+        lang === "ar"
+          ? "نبدأ العمل بأجود الخامات الوطنية والعالمية لضمان الدقة."
+          : "We start working with the finest local and international materials to ensure precision.",
       icon: <HardHat className="w-8 h-8" />,
       color: "bg-emerald-50 text-emerald-600",
     },
     {
-      title: "البيت المتألق",
-      description: "نسلمك منزلك كما حلمت به تماماً، متألقاً وبأعلى جودة.",
+      title: lang === "ar" ? "البيت المتألق" : "Al-Bayt Al-Mutaaliq",
+      description:
+        lang === "ar"
+          ? "نسلمك منزلك كما حلمت به تماماً، متألقاً وبأعلى جودة."
+          : "We deliver your home exactly as you dreamed, sparkling and with the highest quality.",
       icon: <Sparkles className="w-8 h-8" />,
       color: "bg-purple-50 text-purple-600",
     },
   ];
 
   return (
-    <section className="py-24 bg-white" dir="rtl">
+    <section className="py-24 bg-white" dir={lang === "ar" ? "rtl" : "ltr"}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
@@ -44,7 +58,16 @@ const Process = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-4xl font-black text-slate-900 mb-6"
           >
-            كيف نحول <span className="text-amber-500">حلمك</span> إلى واقع؟
+            {lang === "ar" ? (
+              <>
+                كيف نحول <span className="text-amber-500">حلمك</span> إلى واقع؟
+              </>
+            ) : (
+              <>
+                How do we turn your{" "}
+                <span className="text-amber-500">dream</span> into reality?
+              </>
+            )}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -53,8 +76,9 @@ const Process = () => {
             transition={{ delay: 0.2 }}
             className="text-lg text-slate-600 leading-relaxed"
           >
-            في البيت المتألق، نتبع مساراً واضحاً يضمن لك الحصول على النتيجة التي
-            أبهرتك في الصور، مع مراعاة أدق التفاصيل الفنية والجمالية.
+            {lang === "ar"
+              ? "في البيت المتألق، نتبع مساراً واضحاً يضمن لك الحصول على النتيجة التي أبهرتك في الصور، مع مراعاة أدق التفاصيل الفنية والجمالية."
+              : "At Al-Bayt Al-Mutaaliq, we follow a clear path that ensures you get the result that dazzled you in the photos, taking into account the finest technical and aesthetic details."}
           </motion.p>
         </div>
 
@@ -84,7 +108,11 @@ const Process = () => {
               </p>
 
               {/* Step Number Badge */}
-              <div className="absolute -top-2 -right-2 w-8 h-8 bg-white border border-slate-100 rounded-full flex items-center justify-center text-xs font-black text-slate-400 shadow-sm group-hover:bg-amber-500 group-hover:text-white transition-colors">
+              <div
+                className={`absolute -top-2 ${
+                  lang === "ar" ? "-right-2" : "-left-2"
+                } w-8 h-8 bg-white border border-slate-100 rounded-full flex items-center justify-center text-xs font-black text-slate-400 shadow-sm group-hover:bg-amber-500 group-hover:text-white transition-colors`}
+              >
                 0{index + 1}
               </div>
             </motion.div>
@@ -99,18 +127,21 @@ const Process = () => {
           className="mt-20 p-8 rounded-3xl bg-linear-to-r from-slate-900 to-slate-800 text-center text-white"
         >
           <h4 className="text-xl md:text-2xl font-bold mb-4">
-            هل تملك صورة لتصميم معين؟
+            {lang === "ar"
+              ? "هل تملك صورة لتصميم معين؟"
+              : "Do you have a photo of a specific design?"}
           </h4>
           <p className="text-slate-400 mb-8 max-w-xl mx-auto">
-            أرسلها لنا عبر الواتساب الآن وسيقوم مهندسونا بدراستها وتقديم استشارة
-            مجانية لك حول كيفية تنفيذها.
+            {lang === "ar"
+              ? "أرسلها لنا عبر الواتساب الآن وسيقوم مهندسونا بدراستها وتقديم استشارة مجانية لك حول كيفية تنفيذها."
+              : "Send it to us via WhatsApp now, and our engineers will study it and provide you with a free consultation on how to implement it."}
           </p>
           <Link
             href="https://wa.me/201092141964"
             target="_blank"
             className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-full font-bold transition-all active:scale-95 shadow-lg shadow-amber-500/20"
           >
-            أرسل صورتك الآن
+            {lang === "ar" ? "أرسل صورتك الآن" : "Send your photo now"}
           </Link>
         </motion.div>
       </div>

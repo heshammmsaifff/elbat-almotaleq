@@ -11,26 +11,29 @@ import {
   HardHat,
 } from "lucide-react";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 const AboutPage = () => {
+  const { lang } = useLanguage();
+
   const stats = [
     {
-      label: "مشروع مكتمل",
+      label: lang === "ar" ? "مشروع مكتمل" : "Completed Projects",
       value: "+150",
       icon: <Award className="text-amber-500" size={"50px"} />,
     },
     {
-      label: "عميل سعيد",
+      label: lang === "ar" ? "عميل سعيد" : "Happy Clients",
       value: "+120",
       icon: <Users className="text-blue-500" size={"50px"} />,
     },
     {
-      label: "سنة خبرة",
+      label: lang === "ar" ? "سنة خبرة" : "Years of Experience",
       value: "+10",
       icon: <ShieldCheck className="text-emerald-500" size={"50px"} />,
     },
     {
-      label: "مهندس وخبير",
+      label: lang === "ar" ? "مهندس وخبير" : "Engineers & Experts",
       value: "+25",
       icon: <HardHat className="text-purple-500" size={"50px"} />,
     },
@@ -38,50 +41,85 @@ const AboutPage = () => {
 
   const values = [
     {
-      title: "الجودة والإتقان",
-      desc: "نلتزم بأعلى المعايير العالمية في اختيار المواد ودقة التنفيذ لضمان استدامة أعمالنا.",
+      title: lang === "ar" ? "الجودة والإتقان" : "Quality & Mastery",
+      desc:
+        lang === "ar"
+          ? "نلتزم بأعلى المعايير العالمية في اختيار المواد ودقة التنفيذ لضمان استدامة أعمالنا."
+          : "We adhere to the highest international standards in material selection and execution precision to ensure the sustainability of our work.",
       icon: <ShieldCheck size={32} />,
       color: "bg-emerald-50 text-emerald-600",
     },
     {
-      title: "الابتكار في التصميم",
-      desc: "لا نكتفي بالتقليد، بل نبتكر حلولاً تصميمية فريدة تعكس شخصية صاحب المكان.",
+      title: lang === "ar" ? "الابتكار في التصميم" : "Innovation in Design",
+      desc:
+        lang === "ar"
+          ? "لا نكتفي بالتقليد، بل نبتكر حلولاً تصميمية فريدة تعكس شخصية صاحب المكان."
+          : "We don't just imitate; we create unique design solutions that reflect the personality of the space owner.",
       icon: <Lightbulb size={32} />,
       color: "bg-amber-50 text-amber-600",
     },
     {
-      title: "تلبية الرؤية",
-      desc: "نحن بارعون في تحويل أي تصميم تراه على الإنترنت إلى واقع ملموس في منزلك.",
+      title: lang === "ar" ? "تلبية الرؤية" : "Fulfilling the Vision",
+      desc:
+        lang === "ar"
+          ? "نحن بارعون في تحويل أي تصميم تراه على الإنترنت إلى واقع ملموس في منزلك."
+          : "We are experts at turning any design you see online into a tangible reality in your home.",
       icon: <Target size={32} />,
       color: "bg-blue-50 text-blue-600",
     },
   ];
 
   return (
-    <main className="min-h-screen bg-white pt-24 pb-20" dir="rtl">
+    <main
+      className="min-h-screen bg-white pt-24 pb-20"
+      dir={lang === "ar" ? "rtl" : "ltr"}
+    >
       {/* Section 1: Hero About */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: lang === "ar" ? 30 : -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
             <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-8 leading-tight">
-              نحن في <span className="text-amber-500">البيت المتألق</span>{" "}
-              <br />
-              نصنع للمكان روحاً وقصة
+              {lang === "ar" ? (
+                <>
+                  نحن في <span className="text-amber-500">البيت المتألق</span>{" "}
+                  <br />
+                  نصنع للمكان روحاً وقصة
+                </>
+              ) : (
+                <>
+                  At <span className="text-amber-500">The Shining House</span>{" "}
+                  <br />
+                  We create soul and story for spaces
+                </>
+              )}
             </h1>
             <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
               <p>
-                تأسست مؤسسة <strong>البيت المتألق</strong> لتكون شريككم الموثوق
-                في رحلة بناء وتجميل مساحاتكم الخاصة. نحن مؤسسة سعودية متخصصة في
-                أعمال الديكور الداخلي والخارجي وتنسيق الحدائق.
+                {lang === "ar" ? (
+                  <>
+                    تأسست مؤسسة <strong>البيت المتألق</strong> لتكون شريككم
+                    الموثوق في رحلة بناء وتجميل مساحاتكم الخاصة. نحن مؤسسة
+                    سعودية متخصصة في أعمال الديكور الداخلي والخارجي وتنسيق
+                    الحدائق.
+                  </>
+                ) : (
+                  <>
+                    <strong>The Shining House</strong> was established to be
+                    your trusted partner in the journey of building and
+                    beautifying your private spaces. We are a Saudi institution
+                    specialized in interior and exterior decoration and
+                    landscaping.
+                  </>
+                )}
               </p>
               <p>
-                نؤمن بأن كل زاوية في منزلك تستحق الاهتمام، لذلك نسخر خبرات
-                مهندسينا ومصممينا لتحويل رؤيتكم إلى واقع يفوق التوقعات، معتمدين
-                على أحدث التقنيات وأجود الخامات.
+                {lang === "ar"
+                  ? "نؤمن بأن كل زاوية في منزلك تستحق الاهتمام، لذلك نسخر خبرات مهندسينا ومصممينا لتحويل رؤيتكم إلى واقع يفوق التوقعات، معتمدين على أحدث التقنيات وأجود الخامات."
+                  : "We believe that every corner of your home deserves attention. Therefore, we harness the expertise of our engineers and designers to turn your vision into a reality that exceeds expectations, relying on the latest technologies and finest materials."}
               </p>
             </div>
           </motion.div>
@@ -90,11 +128,17 @@ const AboutPage = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative h-[500px] rounded-[3rem] overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500"
+            className={`relative h-[500px] rounded-[3rem] overflow-hidden shadow-2xl transition-transform duration-500 ${
+              lang === "ar"
+                ? "rotate-2 hover:rotate-0"
+                : "-rotate-2 hover:rotate-0"
+            }`}
           >
             <Image
-              src="/services/interior.jpg" // استبدلها بصورة لمكتبكم أو فريق العمل
-              alt="عن البيت المتألق"
+              src="/services/interior.jpg"
+              alt={
+                lang === "ar" ? "عن البيت المتألق" : "About Al-Bayt Al-Mutaaliq"
+              }
               fill
               className="object-cover"
             />
@@ -132,10 +176,12 @@ const AboutPage = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4">
-            قيمنا التي نحيا بها
+            {lang === "ar" ? "قيمنا التي نحيا بها" : "The Values We Live By"}
           </h2>
           <p className="text-slate-500 max-w-2xl mx-auto">
-            المبادئ التي تحكم كل مسمار نضعه وكل خط نرسمه في مشاريعنا.
+            {lang === "ar"
+              ? "المبادئ التي تحكم كل مسمار نضعه وكل خط نرسمه في مشاريعنا."
+              : "The principles that govern every nail we drive and every line we draw in our projects."}
           </p>
         </div>
 
@@ -168,23 +214,36 @@ const AboutPage = () => {
         <div className="bg-amber-500 rounded-[3rem] p-10 md:p-16 text-center text-white shadow-2xl shadow-amber-200 overflow-hidden relative">
           <div className="relative z-10">
             <h2 className="text-3xl md:text-4xl font-black mb-6">
-              هل أنت جاهز لتجعل منزلك متألقاً؟
+              {lang === "ar"
+                ? "هل أنت جاهز لتجعل منزلك متألقاً؟"
+                : "Are you ready to make your home shine?"}
             </h2>
             <p className="text-amber-100 text-lg mb-10 max-w-xl mx-auto">
-              فريقنا الهندسي في انتظارك لتقديم الاستشارة الأنسب لمساحتك
-              وميزانيتك.
+              {lang === "ar"
+                ? "فريقنا الهندسي في انتظارك لتقديم الاستشارة الأنسب لمساحتك وميزانيتك."
+                : "Our engineering team is waiting for you to provide the best consultation for your space and budget."}
             </p>
-            <div className="flex flex-col  sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
                 <button className="bg-white cursor-pointer text-amber-500 font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-shadow w-full sm:w-auto">
-                  احجز استشارتك الآن
+                  {lang === "ar"
+                    ? "احجز استشارتك الآن"
+                    : "Book Your Consultation Now"}
                 </button>
               </Link>
             </div>
           </div>
           {/* Decorative Circles */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-amber-400 rounded-full -mr-32 -mt-32 opacity-50 shadow-inner"></div>
-          <div className="absolute bottom-0 left-0 w-40 h-40 bg-amber-600 rounded-full -ml-20 -mb-20 opacity-50 shadow-inner"></div>
+          <div
+            className={`absolute top-0 ${
+              lang === "ar" ? "right-0 -mr-32" : "left-0 -ml-32"
+            } w-64 h-64 bg-amber-400 rounded-full -mt-32 opacity-50 shadow-inner`}
+          ></div>
+          <div
+            className={`absolute bottom-0 ${
+              lang === "ar" ? "left-0 -ml-20" : "right-0 -mr-20"
+            } w-40 h-40 bg-amber-600 rounded-full -mb-20 opacity-50 shadow-inner`}
+          ></div>
         </div>
       </section>
     </main>

@@ -2,13 +2,37 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Send, ArrowLeft } from "lucide-react";
+import { Menu, X, Send, ArrowLeft, ArrowRight, Languages } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useLanguage } from "@/context/LanguageContext"; // تأكد من المسار الصحيح
 
 const Navbar = () => {
+  const { lang, toggleLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  // نصوص الروابط والترجمات
+  const dict = {
+    ar: {
+      home: "الرئيسية",
+      services: "خدماتنا",
+      about: "معلومات عنا",
+      projects: "المشاريع",
+      contact: "تواصل معنا",
+      rights: "جميع الحقوق محفوظة",
+    },
+    en: {
+      home: "Home",
+      services: "Services",
+      about: "About Us",
+      projects: "Projects",
+      contact: "Contact Us",
+      rights: "All Rights Reserved",
+    },
+  };
+
+  const t = dict[lang];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -23,28 +47,26 @@ const Navbar = () => {
   }, [isOpen]);
 
   const navLinks = [
-    { name: "الرئيسية", href: "/" },
-    { name: "خدماتنا", href: "/services" },
-    { name: "معلومات عنا", href: "/about" },
-    { name: "المشاريع", href: "/projects" },
-    { name: "تواصل معنا", href: "/contact", isButton: true },
+    { name: t.home, href: "/" },
+    { name: t.services, href: "/services" },
+    { name: t.about, href: "/about" },
+    { name: t.projects, href: "/projects" },
+    { name: t.contact, href: "/contact", isButton: true },
   ];
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 px-4 sm:px-6 lg:px-8 ${
-        scrolled ? "py-2 mt-2" : "py-4 mt-0"
-      }`}
-      dir="rtl"
+      className={`fixed top-0 w-full z-50 pt-2 transition-all duration-300 px-4 sm:px-6 lg:px-8 `}
+      dir={lang === "ar" ? "rtl" : "ltr"}
     >
       <div
         className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
           scrolled
-            ? "bg-white/80 backdrop-blur-md shadow-lg rounded-2xl border border-white/20"
-            : "bg-transparent"
+            ? "bg-white/40 backdrop-blur-md py-5 shadow-lg rounded-2xl border border-white/20"
+            : "bg-transparent py-5"
         }`}
       >
-        <div className="flex justify-between items-center ">
+        <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Link href="/" className="flex items-center">
@@ -80,14 +102,43 @@ const Navbar = () => {
                 </span>
 
                 {!link.isButton && (
-                  <span className="absolute bottom-1 right-4 left-4 h-0.5 bg-amber-500 origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                  <span
+                    className={`absolute bottom-1 right-4 left-4 h-0.5 bg-amber-500 transition-transform duration-300 scale-x-0 group-hover:scale-x-100 ${
+                      lang === "ar" ? "origin-right" : "origin-left"
+                    }`}
+                  />
                 )}
               </Link>
             ))}
+
+            {/* Language Switcher Desktop */}
+            {/* <button
+              onClick={toggleLanguage}
+              className={`ml-4 flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all ${
+                scrolled
+                  ? "border-gray-200 text-gray-700 hover:bg-gray-50"
+                  : "border-white/30 text-gray-900 hover:bg-white/10"
+              }`}
+            >
+              <Languages size={18} className="text-amber-500" />
+              <span className="text-sm font-bold">{t.langName}</span>
+            </button> */}
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-3">
+            {/* Language Switcher Mobile (Small Icon) */}
+            {/* <button
+              onClick={toggleLanguage}
+              className={`p-2 rounded-xl transition-colors ${
+                scrolled
+                  ? "bg-amber-50 text-amber-600"
+                  : "bg-white/20 text-gray-900 backdrop-blur-md border border-white/30"
+              }`}
+            >
+              <Languages size={22} />
+            </button> */}
+
             <button
               onClick={() => setIsOpen(true)}
               className={`p-2 rounded-xl transition-colors ${
@@ -117,11 +168,13 @@ const Navbar = () => {
 
             {/* Sidebar Content */}
             <motion.div
-              initial={{ x: "100%" }}
+              initial={{ x: lang === "ar" ? "100%" : "-100%" }}
               animate={{ x: 0 }}
-              exit={{ x: "100%" }}
+              exit={{ x: lang === "ar" ? "100%" : "-100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="absolute top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl flex flex-col"
+              className={`absolute top-0 ${
+                lang === "ar" ? "right-0" : "left-0"
+              } h-full w-[85%] max-w-sm bg-white shadow-2xl flex flex-col`}
             >
               {/* Sidebar Header */}
               <div className="p-6 flex items-center justify-between border-b border-gray-100 bg-gray-50/50">
@@ -140,14 +193,13 @@ const Navbar = () => {
                 </button>
               </div>
 
-              {/* Sidebar Links (Scrollable Area) */}
-              {/* Note: Scrollbar styles moved to global CSS to avoid hydration error */}
-              <div className="flex-1 overflow-y-auto overflow-x-hidden p-6">
-                <nav className="flex flex-col gap-3">
+              {/* Sidebar Links */}
+              <div className="flex-1 overflow-y-auto p-6">
+                <nav className="flex flex-col gap-3 text-start">
                   {navLinks.map((link, i) => (
                     <motion.div
                       key={link.name}
-                      initial={{ opacity: 0, x: 20 }}
+                      initial={{ opacity: 0, x: lang === "ar" ? 20 : -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.1 }}
                     >
@@ -164,20 +216,39 @@ const Navbar = () => {
                           {link.name}
                         </span>
                         {link.isButton ? (
-                          <Send size={18} />
-                        ) : (
+                          <Send
+                            size={18}
+                            className={lang === "en" ? "rotate-180" : ""}
+                          />
+                        ) : lang === "ar" ? (
                           <ArrowLeft size={18} className="opacity-30" />
+                        ) : (
+                          <ArrowRight size={18} className="opacity-30" />
                         )}
                       </Link>
                     </motion.div>
                   ))}
+
+                  {/* Language Switcher inside Sidebar */}
+                  {/* <button
+                    onClick={() => {
+                      toggleLanguage();
+                      setIsOpen(false);
+                    }}
+                    className="flex items-center justify-between p-4 rounded-2xl text-gray-700 bg-gray-50 border border-gray-100 mt-4"
+                  >
+                    <span className="font-bold flex items-center gap-3">
+                      <Languages size={20} className="text-amber-500" />
+                      {t.langName}
+                    </span>
+                  </button> */}
                 </nav>
               </div>
 
               {/* Sidebar Footer */}
               <div className="p-6 border-t border-gray-100 bg-gray-50">
                 <p className="text-sm text-gray-400 text-center font-medium">
-                  © 2024 جميع الحقوق محفوظة
+                  © 2024 {t.rights}
                 </p>
               </div>
             </motion.div>
