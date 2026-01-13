@@ -138,7 +138,7 @@ const ContactPage = () => {
 
               {/* قسم البريد الإلكتروني */}
               <a
-                href="mailto:info@albaytalmutaaliq.com"
+                href="mailto:info@albayt-almutaalek.com"
                 className="flex items-start gap-4 group cursor-pointer"
               >
                 <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-blue-500 group-hover:text-white transition-all">
@@ -149,7 +149,7 @@ const ContactPage = () => {
                     {lang === "ar" ? "البريد الإلكتروني" : "Email Address"}
                   </p>
                   <p className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
-                    info@albaytalmutaaliq.com
+                    info@albayt-almutaalek.com
                   </p>
                 </div>
               </a>
