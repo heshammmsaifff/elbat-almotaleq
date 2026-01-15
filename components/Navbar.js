@@ -19,6 +19,7 @@ const Navbar = () => {
       services: "خدماتنا",
       about: "معلومات عنا",
       projects: "المشاريع",
+      blogs: "المدونة",
       contact: "تواصل معنا",
       rights: "جميع الحقوق محفوظة",
     },
@@ -27,6 +28,7 @@ const Navbar = () => {
       services: "Services",
       about: "About Us",
       projects: "Projects",
+      blogs: "Blogs",
       contact: "Contact Us",
       rights: "All Rights Reserved",
     },
@@ -51,6 +53,7 @@ const Navbar = () => {
     { name: t.services, href: "/services" },
     { name: t.about, href: "/about" },
     { name: t.projects, href: "/projects" },
+    { name: t.blogs, href: "/blogs" },
     { name: t.contact, href: "/contact", isButton: true },
   ];
 

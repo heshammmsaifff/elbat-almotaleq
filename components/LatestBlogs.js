@@ -116,7 +116,7 @@ const LatestBlogs = () => {
           </div>
           {blogs.length > 0 && (
             <Link
-              href="/blog"
+              href="/blogs"
               className="flex items-center gap-2 text-amber-600 font-bold hover:gap-4 transition-all"
             >
               {t.viewAll}
@@ -225,6 +225,24 @@ const LatestBlogs = () => {
                 <X size={24} />
               </button>
 
+              {/* Mobile Header (Visible only on small screens) */}
+              <div className="block lg:hidden p-8 pb-0 pt-16 text-start">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-amber-600 font-bold text-xs uppercase tracking-widest">
+                    {t.status}
+                  </span>
+                </div>
+                <h2 className="text-2xl font-black text-slate-900 mb-2 leading-tight">
+                  {lang === "ar"
+                    ? selectedBlog.title
+                    : selectedBlog.title_en || selectedBlog.title}
+                </h2>
+                <div className="flex items-center gap-2 text-slate-400 text-sm">
+                  <Calendar size={14} /> {formatDate(selectedBlog.created_at)}
+                </div>
+              </div>
+
+              {/* Images Container */}
               <div className="w-full lg:w-2/3 bg-slate-50 p-4 md:p-8 lg:overflow-y-auto">
                 <div className="flex flex-col gap-6">
                   {selectedBlog.images_urls?.map((url, index) => (
@@ -238,30 +256,37 @@ const LatestBlogs = () => {
                 </div>
               </div>
 
+              {/* Text Content */}
               <div
                 className={`w-full lg:w-1/3 flex flex-col bg-white border-t lg:border-t-0 ${
                   lang === "ar" ? "lg:border-r" : "lg:border-l"
                 } border-slate-100`}
               >
                 <div className="p-8 md:p-12 lg:overflow-y-auto text-start">
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className="text-amber-600 font-bold text-xs uppercase tracking-widest">
-                      {t.status}
-                    </span>
+                  {/* Desktop Header (Hidden on mobile) */}
+                  <div className="hidden lg:block">
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className="text-amber-600 font-bold text-xs uppercase tracking-widest">
+                        {t.status}
+                      </span>
+                    </div>
+                    <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-4 leading-tight">
+                      {lang === "ar"
+                        ? selectedBlog.title
+                        : selectedBlog.title_en || selectedBlog.title}
+                    </h2>
+                    <div className="flex items-center gap-2 text-slate-400 text-sm mb-6">
+                      <Calendar size={16} />{" "}
+                      {formatDate(selectedBlog.created_at)}
+                    </div>
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-4 leading-tight">
-                    {lang === "ar"
-                      ? selectedBlog.title
-                      : selectedBlog.title_en || selectedBlog.title}
-                  </h2>
-                  <div className="flex items-center gap-2 text-slate-400 text-sm mb-6">
-                    <Calendar size={16} /> {formatDate(selectedBlog.created_at)}
-                  </div>
+
                   <p className="text-slate-600 leading-relaxed text-lg whitespace-pre-wrap">
                     {lang === "ar"
                       ? selectedBlog.description
                       : selectedBlog.description_en || selectedBlog.description}
                   </p>
+
                   <div className="mt-8 pt-8 border-t border-slate-100">
                     <button
                       onClick={() => setSelectedBlog(null)}
