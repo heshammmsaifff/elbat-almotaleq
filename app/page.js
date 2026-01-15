@@ -6,6 +6,7 @@ import Services from "@/components/Services";
 import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
 import LatestProjects from "@/components/LatestProjects";
+import LatestBlogs from "@/components/LatestBlogs";
 
 export default function page() {
   return (
@@ -13,6 +14,7 @@ export default function page() {
       <Hero />
       <Process />
       <Services />
+      <LatestBlogs />
       <LatestProjects />
       <Contact />
     </>

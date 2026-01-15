@@ -20,6 +20,7 @@ const Footer = () => {
     { name: lang === "ar" ? "الرئيسية" : "Home", href: "/" },
     { name: lang === "ar" ? "خدماتنا" : "Services", href: "/services" },
     { name: lang === "ar" ? "معلومات عنا" : "About Us", href: "/about" },
+    { name: lang === "ar" ? "المقالات" : "Blogs", href: "/blogs" },
     { name: lang === "ar" ? "المشاريع" : "Projects", href: "/projects" },
     { name: lang === "ar" ? "تواصل معنا" : "Contact Us", href: "/contact" },
   ];
@@ -145,8 +146,6 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-
-        {/* حقوق النشر */}
         <div className="border-t border-slate-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
           <p>
             © {new Date().getFullYear()}{" "}
